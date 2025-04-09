@@ -84,7 +84,7 @@ def crear_servicio(request):
 @login_required
 def listar_servicios(request):
     servicios = Servicio.objects.all()
-    return render(request, 'crud/servicios/lista_servicios.html', context)
+    return render(request, 'crud/lista_servicios.html', {'servicios': servicios})
 
 @login_required
 def eliminar_servicio(request, servicio_id):
