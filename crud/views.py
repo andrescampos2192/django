@@ -86,8 +86,7 @@ def listar_servicios(request):
     servicios = Servicio.objects.all()
     return render(request, 'crud/lista_servicios.html', {'servicios': servicios})
 
-@login_required
-def eliminar_servicio(request, servicio_id):
-    servicio = get_object_or_404(Servicio, id=servicio_id)
+def eliminar_servicio(request, id):
+    servicio = get_object_or_404(Servicio, id=id)
     servicio.delete()
     return redirect('listar_servicios')

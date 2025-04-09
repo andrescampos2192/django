@@ -19,8 +19,9 @@ urlpatterns = [
      path('servicios/', views.lista_servicios, name='lista_servicios'),
     path('servicios/nuevo/', views.crear_servicio, name='crear_servicio'),
     path('crear-servicio/', crear_servicio, name='crear_servicio'),
-path('servicio/eliminar/<int:servicio_id>/', eliminar_servicio, name='eliminar_servicio'),
+path('eliminar-servicio/<int:servicio_id>/', eliminar_servicio, name='eliminar_servicio'),
 path('servicios/', views.lista_servicios, name='listar_servicios'),
+
 
 
 

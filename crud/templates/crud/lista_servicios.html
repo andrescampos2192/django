@@ -20,9 +20,9 @@
             <td class="px-4 py-2">{{ servicio.nombre }}</td>
             <td class="px-4 py-2">{{ servicio.descripcion }}</td>
             <td class="px-4 py-2">
-                <a href="{% url 'eliminar_servicio' servicio.id %}"
-                   onclick="return confirm('¿Estás seguro de eliminar este servicio?')"
-                   class="text-red-500 font-bold hover:text-red-700 text-lg">✕</a>
+                <a href="{% url 'eliminar_servicio' servicio.id %}" 
+                onclick="return confirm('¿Estás seguro de eliminar este servicio?')" 
+                class="text-red-500 font-bold hover:text-red-700 text-lg">✕</a>
             </td>
         </tr>
         {% empty %}
