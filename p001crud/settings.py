@@ -15,6 +15,11 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# URL a la que el usuario se redirige después del login
+LOGIN_REDIRECT_URL = '/dashboard/'
+
+# URL a la que se redirige después del logout (puede ser la página de bienvenida)
+LOGOUT_REDIRECT_URL = '/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -37,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crud.apps.CrudConfig'
+    'crud.apps.CrudConfig',
+    'accounts',
 ]
 
 MIDDLEWARE = [
