@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Servicios Registrados</h2>
+
+<table class="w-full border-collapse bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-blue-100">
+        <tr>
+            <th class="px-4 py-2 text-left">#</th>
+            <th class="px-4 py-2 text-left">Nombre</th>
+            <th class="px-4 py-2 text-left">Descripción</th>
+            <th class="px-4 py-2 text-left">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for servicio in servicios %}
+        <tr class="border-t hover:bg-gray-50">
+            <td class="px-4 py-2">{{ forloop.counter }}</td>
+            <td class="px-4 py-2">{{ servicio.nombre }}</td>
+            <td class="px-4 py-2">{{ servicio.descripcion }}</td>
+            <td class="px-4 py-2">
+                <a href="{% url 'eliminar_servicio' servicio.id %}"
+                   onclick="return confirm('¿Estás seguro de eliminar este servicio?')"
+                   class="text-red-500 font-bold hover:text-red-700 text-lg">✕</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center py-4 text-gray-500">No hay servicios registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

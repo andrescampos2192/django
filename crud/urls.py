@@ -1,15 +1,29 @@
 from django.urls import path
-from django.contrib.auth import views as auth_views
 from . import views
+from django.contrib.auth import views as auth_views
+from .views import crear_servicio
+from django.contrib.auth.views import LogoutView
+from .views import listar_servicios, eliminar_servicio
 
-app_name = 'crud'  # Namespace para las URLs de crud
+
+
+
+app_name = 'crud'
 
 urlpatterns = [
-    # Rutas de la funcionalidad CRUD existente
     path('', views.task_list_and_create, name='crud_list'),
-    
-    # Rutas de autenticación
     path('register/', views.register, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='crud/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+    # otras rutas...
+     path('login/', auth_views.LoginView.as_view(), name='login'),
+     path('logout/', views.custom_logout, name='logout'),
+     path('servicios/', views.lista_servicios, name='lista_servicios'),
+    path('servicios/nuevo/', views.crear_servicio, name='crear_servicio'),
+    path('crear-servicio/', crear_servicio, name='crear_servicio'),
+path('servicio/eliminar/<int:servicio_id>/', eliminar_servicio, name='eliminar_servicio'),
+path('servicios/', listar_servicios, name='listar_servicios'),
+
+
+
+    
+
 ]

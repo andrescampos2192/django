@@ -1,12 +1,139 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f8fc;
+            color: #333;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 220px;
+            background-color: #007acc;
+            color: white;
+            position: fixed;
+            transition: width 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        .sidebar.collapsed {
+            width: 60px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 1rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+
+        .sidebar ul li {
+            padding: 0.8rem 1rem;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .main-content {
+            margin-left: 220px;
+            padding: 2rem;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.collapsed {
+            margin-left: 60px;
+        }
+
+        .toggle-btn {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            margin: 10px 10px 0;
+            cursor: pointer;
+        }
+
+        .top-bar {
+            background-color: #005fa3;
+            padding: 0.8rem 1rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .top-bar h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .user-info {
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: #555;
+            font-size: 1rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Dashboard</h1>
-    <p>Bienvenido, {{ user.username }}.</p>
-    <p><a href="{% url 'logout' %}">Cerrar sesión</a></p>
+
+    <div class="sidebar" id="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        <ul class="nav-links">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'crud_list:listar_servicios' %}">Servicios registradoss</a></li>
+            </form>
+            
+        </ul>
+    </div>
+    
+
+    <div class="main-content" id="mainContent">
+        <div class="top-bar">
+            <h3>Dashboard</h3>
+            <div class="user-info">
+                Bienvenido: {{ user.username }}
+            </div>
+            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="background: none; border: none; color: white; cursor: pointer;">
+                    Cerrar Sesión
+                </button>
+        </div>
+        <h1>Bienvenido al Panel de Administración</h1>
+        <p>Aquí podrás gestionar tus servicios y ventas.</p>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+        }
+        </script>
+        
 </body>
 </html>
