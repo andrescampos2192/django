@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <form action="" method="post">
         {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit"> Guardar Tarea</button>
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
     </form>
 
-    {% for task in tasks %}
-
-    <li>
-        <strong> {{task.title}}</strong> {{task.description}}
-
-    </li>
-    {% empty %}
-    <li>
-       No hay tareas
-
-    </li>
-{% endfor %}
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <strong>{{ task.title }}</strong> - {{ task.description }}
+            </li>
+        {% empty %}
+            <li>No hay tareas</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
