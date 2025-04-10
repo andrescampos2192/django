@@ -9,21 +9,28 @@
     <p class="dashboard-subtitle">Aquí podrás gestionar tus servicios y ventas.</p>
 
     <div class="dashboard-container">
+        <!-- Widget de Total de Clientes -->
+        <div class="widget">
+            <h2>{{ total_clientes }}</h2>
+            <p>Clientes registrados</p>
+        </div>
+
+        <!-- Widget de Cuentas Vendidas Este Mes -->
         <div class="widget">
             <h2>{{ cuentas_vendidas_mes }}</h2>
             <p>Cuentas vendidas este mes</p>
         </div>
+
+        <!-- Widget de Ganancias Este Mes -->
         <div class="widget">
-            <h2>${{ ganancias_mes }}</h2>
+            <h2>${{ ganancias_mes}}</h2>
             <p>Ganancias este mes</p>
         </div>
+
+        <!-- Widget de Cuentas por Vencer -->
         <div class="widget warning">
             <h2>{{ cuentas_por_vencer }}</h2>
             <p>Cuentas por vencer</p>
         </div>
-        <div class="widget">
-            <h2>{{ total_clientes }}</h2>
-            <p>Total de clientes</p>
-        </div>
-             
+    </div>
 {% endblock %}
