@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 from .forms import ServicioForm
 from .models import Servicio
 from django.shortcuts import render, redirect, get_object_or_404
+from .forms import VentaForm
+from .models import Venta
+from django.utils import timezone
+
 
 
 def task_list_and_create(request):
@@ -90,3 +94,27 @@ def eliminar_servicio(request, id):
     servicio = get_object_or_404(Servicio, id=id)
     servicio.delete()
     return redirect('listar_servicios')
+
+
+from django.contrib import messages  # Asegúrate de importar esto
+
+@login_required
+def registrar_venta(request):
+    if request.method == 'POST':
+        form = VentaForm(request.POST)
+        if form.is_valid():
+            venta = form.save(commit=False)
+            venta.fecha_compra = timezone.now()
+            venta.fecha_venta = timezone.now()
+            venta.usuario = request.user
+            venta.save()
+            messages.success(request, '¡Venta registrada exitosamente!')
+            return redirect('crud:registrar_venta')  # Te mantiene en la misma página
+    else:
+        form = VentaForm()
+
+    return render(request, 'crud/registrar_venta.html', {'form': form})
+
+def listar_ventas(request):
+    ventas = Venta.objects.all().order_by('-fecha_venta')  # Ordena de más reciente a más antigua
+    return render(request, 'crud/lista_ventas.html', {'ventas': ventas})

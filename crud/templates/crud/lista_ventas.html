@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="titulo">Ventas Registradas</h2>
+    <table class="ventas-table">
+        <thead>
+            <tr>
+                <th>Servicio</th>
+                <th>Cliente</th>
+                <th>Precio Compra</th>
+                <th>Precio Venta</th>
+                <th>Fecha Venta</th>
+                <th>Fecha Vencimiento</th>
+                <th>Observaciones</th>
+                <th>Usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venta in ventas %}
+            <tr>
+                <td>{{ venta.servicio.nombre }}</td>
+                <td>{{ venta.cliente }}</td>
+                <td>{{ venta.precio_compra }}</td>
+                <td>{{ venta.precio_venta }}</td>
+                <td>{{ venta.fecha_venta|date:"d/m/Y H:i" }}</td>
+                <td>{{ venta.fecha_vencimiento|date:"d/m/Y" }}</td>
+                <td>{{ venta.observaciones }}</td>
+                <td>{{ venta.usuario.username }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">No hay ventas registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

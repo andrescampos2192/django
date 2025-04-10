@@ -6,7 +6,7 @@ from crud.views import crear_servicio
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 from crud.views import crear_servicio
-
+from crud.views import registrar_venta
 
 
 
@@ -23,6 +23,7 @@ urlpatterns = [
      path('login/', auth_views.LoginView.as_view(), name='login'),
      path('', include('crud.urls')),
      path('lista_servicios/', dashboard, name='lista_servicios'),
+     path('registrar-venta/', registrar_venta, name='registrar_venta'),
 
      
      

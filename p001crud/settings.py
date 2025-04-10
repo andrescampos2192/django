@@ -30,7 +30,8 @@ SECRET_KEY = 'django-insecure-t0jvq^k4vb64vgqprnhb5(g&2y*dn=371r8h!&&)b87-2zcy+9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.131']
+
 
 
 # Application definition
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crud.apps.CrudConfig',
+    'widget_tweaks',
 ]
 LOGIN_URL = '/crud/accounts/login/'  # o según la URL exacta que estés usando
 LOGIN_REDIRECT_URL = '/dashboard/'  

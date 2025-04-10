@@ -105,7 +105,9 @@
         <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
         <ul class="nav-links">
             <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'crud_list:listar_servicios' %}">Servicios registradoss</a></li>
+            <li><a href="{% url 'crud_list:listar_servicios' %}">Servicios registrados</a></li>
+            <li><a href="{% url 'crud:registrar_venta' %}" class="btn btn-primary">Registrar Venta</a></li>
+            <li><a href="{% url 'crud:listar_ventas' %}">Ventas registradas</a></li>
             </form>
             
         </ul>
