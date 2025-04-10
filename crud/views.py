@@ -121,22 +121,25 @@ def listar_ventas(request):
 
 
 def dashboard_view(request):
-    # Sin filtros: todos los registros de ventas
-    cuentas_vendidas_total = Venta.objects.all().count()
-    ganancias_total = Venta.objects.aggregate(Sum('precio_venta'))['precio_venta__sum'] or 0
-    # Para "cuentas por vencer" usamos también todas las ventas (solo para prueba)
-    cuentas_por_vencer_total = Venta.objects.all().count()
+    hoy = timezone.now().date()  # Define la variable hoy
+    inicio_mes = hoy.replace(day=1)  # Calcula el primer día del mes
+
+    cuentas_vendidas_mes = Venta.objects.filter(fecha_venta__gte=inicio_mes).count()
+    ganancias_mes = Venta.objects.filter(fecha_venta__gte=inicio_mes).aggregate(Sum('precio_venta'))['precio_venta__sum'] or 0
+    cuentas_por_vencer = Venta.objects.filter(fecha_vencimiento__range=[hoy, hoy + timedelta(days=7)]).count()
     total_clientes = Venta.objects.values('cliente').distinct().count()
 
-    print("Total cuentas vendidas:", cuentas_vendidas_total)
-    print("Total ganancias:", ganancias_total)
-    print("Total cuentas por vencer:", cuentas_por_vencer_total)
-    print("Total clientes distintos:", total_clientes)
+    print("Hoy:", hoy)
+    print("Inicio del mes:", inicio_mes)
+    print("Cuentas vendidas este mes:", cuentas_vendidas_mes)
+    print("Ganancias este mes:", ganancias_mes)
+    print("Cuentas por vencer:", cuentas_por_vencer)
+    print("Total de clientes:", total_clientes)
 
     return render(request, 'dashboard.html', {
-        'cuentas_vendidas_mes': cuentas_vendidas_total,
-        'ganancias_mes': ganancias_total,
-        'cuentas_por_vencer': cuentas_por_vencer_total,
+        'cuentas_vendidas_mes': cuentas_vendidas_mes,
+        'ganancias_mes': ganancias_mes,
+        'cuentas_por_vencer': cuentas_por_vencer,
         'total_clientes': total_clientes
     })
 

@@ -10,20 +10,20 @@
 
     <div class="dashboard-container">
         <div class="widget">
-            <h2>{{ total_clientes|default:"0" }}</h2>
-            <p>Clientes registrados</p>
-        </div>
-        <div class="widget">
-            <h2>{{ cuentas_vendidas_mes|default:"0" }}</h2>
+            <h2>{{ cuentas_vendidas_mes }}</h2>
             <p>Cuentas vendidas este mes</p>
         </div>
         <div class="widget">
-            <h2>${{ ganancias_mes|default:"0" }}</h2>
+            <h2>${{ ganancias_mes }}</h2>
             <p>Ganancias este mes</p>
         </div>
         <div class="widget warning">
-            <h2>{{ cuentas_por_vencer|default:"0" }}</h2>
+            <h2>{{ cuentas_por_vencer }}</h2>
             <p>Cuentas por vencer</p>
         </div>
-    </div>
+        <div class="widget">
+            <h2>{{ total_clientes }}</h2>
+            <p>Total de clientes</p>
+        </div>
+             
 {% endblock %}

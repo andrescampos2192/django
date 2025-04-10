@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-from crud.views import registrar_venta
+from crud.views import registrar_venta, dashboard_view
 from .views import listar_ventas
 
 app_name = 'crud'
@@ -17,5 +17,6 @@ urlpatterns = [
     path('eliminar-servicio/<int:id>/', views.eliminar_servicio, name='eliminar_servicio'),
      path('registrar-venta/', registrar_venta, name='registrar_venta'),
     path('ventas/', listar_ventas, name='listar_ventas'),
-    path('dashboard-view/', views.dashboard_view, name='dashboard_view'),
+    path('dashboard/', views.dashboard_view, name='dashboard'),
+
 ]
