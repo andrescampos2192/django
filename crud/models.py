@@ -23,7 +23,7 @@ class Servicio(models.Model):
         return self.nombre
 
 
-class Venta(models.Model):  # ✅ Ahora está fuera de Servicio
+class Venta(models.Model):
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
     cliente = models.CharField(max_length=100)
     precio_compra = models.DecimalField(max_digits=10, decimal_places=2)
@@ -36,3 +36,16 @@ class Venta(models.Model):  # ✅ Ahora está fuera de Servicio
 
     def __str__(self):
         return f"{self.servicio.nombre} - {self.cliente}"
+    
+    @property
+    def ganancia(self):
+        # Retorna la diferencia
+        return self.precio_venta - self.precio_compra
+
+class Cliente(models.Model):
+    nombre = models.CharField(max_length=100)
+    correo = models.EmailField()
+    # Otros campos que necesites para el cliente
+
+    def __str__(self):
+        return self.nombre

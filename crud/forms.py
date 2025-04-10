@@ -1,14 +1,11 @@
 from django import forms
-from .models import task
-from .models import Servicio
-from .models import Venta
+from .models import task, Servicio, Venta
 
 class taskform(forms.ModelForm):
     class Meta:
         model = task
-        fields = ['title','description']
-        
-        
+        fields = ['title', 'description']
+
 class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
@@ -22,6 +19,12 @@ class VentaForm(forms.ModelForm):
             'fecha_vencimiento': forms.DateInput(attrs={'type': 'date'}),
             'observaciones': forms.Textarea(attrs={'rows': 3}),
         }
-        
-        
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['cliente'].required = True
+        self.fields['precio_compra'].required = True
+        self.fields['precio_venta'].required = True
+        self.fields['fecha_vencimiento'].required = True
+
         

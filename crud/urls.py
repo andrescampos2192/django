@@ -17,4 +17,5 @@ urlpatterns = [
     path('eliminar-servicio/<int:id>/', views.eliminar_servicio, name='eliminar_servicio'),
      path('registrar-venta/', registrar_venta, name='registrar_venta'),
     path('ventas/', listar_ventas, name='listar_ventas'),
+    path('dashboard-view/', views.dashboard_view, name='dashboard_view'),
 ]

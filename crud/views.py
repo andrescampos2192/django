@@ -1,14 +1,14 @@
-from django.shortcuts import render, redirect  # No olvides importar redirect
-from .models import task
-from .forms import taskform
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .forms import ServicioForm
-from .models import Servicio
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import VentaForm
-from .models import Venta
+from django.contrib import messages
+from .forms import taskform, ServicioForm, VentaForm
+from .models import task, Servicio, Venta
+from django.db.models import Sum
+from django.utils.timezone import now
+from datetime import timedelta
 from django.utils import timezone
+
 
 
 
@@ -118,3 +118,25 @@ def registrar_venta(request):
 def listar_ventas(request):
     ventas = Venta.objects.all().order_by('-fecha_venta')  # Ordena de más reciente a más antigua
     return render(request, 'crud/lista_ventas.html', {'ventas': ventas})
+
+
+def dashboard_view(request):
+    # Sin filtros: todos los registros de ventas
+    cuentas_vendidas_total = Venta.objects.all().count()
+    ganancias_total = Venta.objects.aggregate(Sum('precio_venta'))['precio_venta__sum'] or 0
+    # Para "cuentas por vencer" usamos también todas las ventas (solo para prueba)
+    cuentas_por_vencer_total = Venta.objects.all().count()
+    total_clientes = Venta.objects.values('cliente').distinct().count()
+
+    print("Total cuentas vendidas:", cuentas_vendidas_total)
+    print("Total ganancias:", ganancias_total)
+    print("Total cuentas por vencer:", cuentas_por_vencer_total)
+    print("Total clientes distintos:", total_clientes)
+
+    return render(request, 'dashboard.html', {
+        'cuentas_vendidas_mes': cuentas_vendidas_total,
+        'ganancias_mes': ganancias_total,
+        'cuentas_por_vencer': cuentas_por_vencer_total,
+        'total_clientes': total_clientes
+    })
+

@@ -1,141 +1,29 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f8fc;
-            color: #333;
-        }
+{% extends 'base.html' %}
 
-        .sidebar {
-            height: 100vh;
-            width: 220px;
-            background-color: #007acc;
-            color: white;
-            position: fixed;
-            transition: width 0.3s ease;
-            overflow-x: hidden;
-        }
+{% block title %}Dashboard{% endblock %}
 
-        .sidebar.collapsed {
-            width: 60px;
-        }
+{% block header %}Dashboard{% endblock %}
 
-        .sidebar h2 {
-            text-align: center;
-            padding: 1rem 0;
-            font-size: 1rem;
-        }
+{% block content %}
+    <h1 class="dashboard-title">Bienvenido al Panel de Administración</h1>
+    <p class="dashboard-subtitle">Aquí podrás gestionar tus servicios y ventas.</p>
 
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 2rem;
-        }
-
-        .sidebar ul li {
-            padding: 0.8rem 1rem;
-        }
-
-        .sidebar ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.95rem;
-        }
-
-        .main-content {
-            margin-left: 220px;
-            padding: 2rem;
-            transition: margin-left 0.3s ease;
-        }
-
-        .main-content.collapsed {
-            margin-left: 60px;
-        }
-
-        .toggle-btn {
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            margin: 10px 10px 0;
-            cursor: pointer;
-        }
-
-        .top-bar {
-            background-color: #005fa3;
-            padding: 0.8rem 1rem;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-
-        .top-bar h3 {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-
-        .user-info {
-            font-size: 0.9rem;
-        }
-
-        h1 {
-            font-size: 1.6rem;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            color: #555;
-            font-size: 1rem;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="sidebar" id="sidebar">
-        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-        <ul class="nav-links">
-            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'crud_list:listar_servicios' %}">Servicios registrados</a></li>
-            <li><a href="{% url 'crud:registrar_venta' %}" class="btn btn-primary">Registrar Venta</a></li>
-            <li><a href="{% url 'crud:listar_ventas' %}">Ventas registradas</a></li>
-            </form>
-            
-        </ul>
-    </div>
-    
-
-    <div class="main-content" id="mainContent">
-        <div class="top-bar">
-            <h3>Dashboard</h3>
-            <div class="user-info">
-                Bienvenido: {{ user.username }}
-            </div>
-            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit" style="background: none; border: none; color: white; cursor: pointer;">
-                    Cerrar Sesión
-                </button>
+    <div class="dashboard-container">
+        <div class="widget">
+            <h2>{{ total_clientes|default:"0" }}</h2>
+            <p>Clientes registrados</p>
         </div>
-        <h1>Bienvenido al Panel de Administración</h1>
-        <p>Aquí podrás gestionar tus servicios y ventas.</p>
+        <div class="widget">
+            <h2>{{ cuentas_vendidas_mes|default:"0" }}</h2>
+            <p>Cuentas vendidas este mes</p>
+        </div>
+        <div class="widget">
+            <h2>${{ ganancias_mes|default:"0" }}</h2>
+            <p>Ganancias este mes</p>
+        </div>
+        <div class="widget warning">
+            <h2>{{ cuentas_por_vencer|default:"0" }}</h2>
+            <p>Cuentas por vencer</p>
+        </div>
     </div>
-
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed');
-        }
-        </script>
-        
-</body>
-</html>
+{% endblock %}

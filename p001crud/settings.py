@@ -30,10 +30,14 @@ SECRET_KEY = 'django-insecure-t0jvq^k4vb64vgqprnhb5(g&2y*dn=371r8h!&&)b87-2zcy+9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.131']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
+STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'crud/static'),
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -73,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -133,3 +138,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+

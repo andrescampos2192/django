@@ -2,10 +2,9 @@
 {% load static %}
 
 {% block content %}
-<div class="servicios-card">
-    <h2>Servicios Registrados</h2>
-    <a href="{% url 'crud:crear_servicio' %}" class="nuevo-btn">+ Nuevo Servicio</a>
-    <table>
+<div class="table-container">
+    <h2 class="title">Lista de Servicios</h2>
+    <table class="styled-table">
         <thead>
             <tr>
                 <th>#</th>
@@ -32,4 +31,5 @@
 </div>
 
 <p class="center-text">© 2025 - Streaming Manager</p>
+
 {% endblock %}

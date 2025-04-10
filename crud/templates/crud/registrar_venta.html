@@ -5,31 +5,70 @@
     <h2>Registrar Venta</h2>
     <form method="post">
         {% csrf_token %}
+
         <div class="form-group">
             {{ form.servicio.label_tag }}
             {{ form.servicio }}
         </div>
+
         <div class="form-group">
             {{ form.cliente.label_tag }}
             {{ form.cliente }}
+            <small class="error-message" id="error-cliente"></small>
         </div>
+
         <div class="form-group">
             {{ form.precio_compra.label_tag }}
             {{ form.precio_compra }}
+            <small class="error-message" id="error-precio_compra"></small>
         </div>
+
         <div class="form-group">
             {{ form.precio_venta.label_tag }}
             {{ form.precio_venta }}
+            <small class="error-message" id="error-precio_venta"></small>
         </div>
+
         <div class="form-group">
             {{ form.fecha_vencimiento.label_tag }}
             {{ form.fecha_vencimiento }}
+            <small class="error-message" id="error-fecha_vencimiento"></small>
         </div>
+
         <div class="form-group">
             {{ form.observaciones.label_tag }}
             {{ form.observaciones }}
         </div>
+
         <button type="submit" class="btn-guardar">Guardar Venta</button>
     </form>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const fields = [
+        { id: 'id_cliente', errorId: 'error-cliente', message: 'Este campo es obligatorio.' },
+        { id: 'id_precio_compra', errorId: 'error-precio_compra', message: 'Ingrese el precio de compra.' },
+        { id: 'id_precio_venta', errorId: 'error-precio_venta', message: 'Ingrese el precio de venta.' },
+        { id: 'id_fecha_vencimiento', errorId: 'error-fecha_vencimiento', message: 'Seleccione una fecha de vencimiento.' },
+    ];
+
+    fields.forEach(field => {
+        const input = document.getElementById(field.id);
+        const errorMsg = document.getElementById(field.errorId);
+
+        input.addEventListener('input', function () {
+            if (input.value.trim() === '') {
+                input.classList.add('input-error');
+                errorMsg.textContent = field.message;
+            } else {
+                input.classList.remove('input-error');
+                errorMsg.textContent = '';
+            }
+        });
+    });
+});
+</script>
 {% endblock %}
