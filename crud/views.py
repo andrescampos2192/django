@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import taskform, ServicioForm, VentaForm
-from .models import task, Servicio, Venta
+from .models import task, Servicio, Venta, Cliente 
 from django.db.models import Sum
 from django.utils.timezone import now
 from datetime import timedelta
@@ -121,24 +121,33 @@ def listar_ventas(request):
 
 
 def dashboard_view(request):
-    print("Entrando a dashboard_view")
+    hoy = timezone.now()
+    inicio_mes = hoy.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     
-    # Valores de prueba
-    cuentas_vendidas_mes = 5
-    ganancias_mes = 1000
-    cuentas_por_vencer = 2
-    total_clientes = 10
-
-    print(f"Ventas del mes: {cuentas_vendidas_mes}")
-    print(f"Ganancias del mes: {ganancias_mes}")
-    print(f"Cuentas por vencer: {cuentas_por_vencer}")
-    print(f"Clientes totales: {total_clientes}")
-
+    # 1. Cuentas vendidas este mes
+    cuentas_vendidas_mes = Venta.objects.filter(
+        fecha_venta__gte=inicio_mes
+    ).count()
+    
+    # 2. Ganancias del mes (suma de todas las ganancias)
+    ganancias_mes = Venta.objects.filter(
+        fecha_venta__gte=inicio_mes
+    ).aggregate(total=Sum('ganancia'))['total'] or 0
+    
+    # 3. Cuentas por vencer (próximos 7 días)
+    fecha_limite = hoy + timedelta(days=7)
+    cuentas_por_vencer = Venta.objects.filter(
+        fecha_vencimiento__gte=hoy,
+        fecha_vencimiento__lte=fecha_limite
+    ).count()
+    
+    # 4. Total de clientes ÚNICOS (desde el campo cliente de Venta)
+    total_clientes = Venta.objects.values('cliente').distinct().count()  # <-- Clave aquí
+    
     return render(request, 'dashboard.html', {
         'cuentas_vendidas_mes': cuentas_vendidas_mes,
         'ganancias_mes': ganancias_mes,
         'cuentas_por_vencer': cuentas_por_vencer,
         'total_clientes': total_clientes
     })
-
 
