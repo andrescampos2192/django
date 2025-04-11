@@ -4,19 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrarse</title>
-
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
 </head>
-<body>
+<body class="register-body">
     <div class="register-container">
-        <h2>Crear una cuenta</h2>
-        <form method="post">
+        <h2 class="register-title">Crear una cuenta</h2>
+        <form method="post" class="register-form">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Registrarse">
+            <input type="submit" value="Registrarse" class="btn-submit">
         </form>
-        <a href="{% url 'login' %}">¿Ya tienes cuenta? Inicia sesión</a>
+        <a href="{% url 'login' %}" class="login-link">¿Ya tienes cuenta? Inicia sesión</a>
     </div>
 </body>
 </html>

@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <title>Página de Bienvenida</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
-
 </head>
-<body>
-    <h1>Bienvenido</h1>
-    <p>
-        <a href="{% url 'register' %}">Registrarse</a> 
-        <a href="{% url 'login' %}">Iniciar sesión</a>
-    </p>
+<body class="home-body">
+    <div class="home-container">
+        <h1 class="home-title">Bienvenid@</h1>
+        <p class="home-links">
+            <a href="{% url 'register' %}" class="btn-home">Registrarse</a>
+            <a href="{% url 'login' %}" class="btn-home">Iniciar sesión</a>
+        </p>
+    </div>
 </body>
 </html>

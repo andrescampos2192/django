@@ -16,8 +16,7 @@ urlpatterns = [
     path('servicios/', views.listar_servicios, name='listar_servicios'),
     path('crear-servicio/', views.crear_servicio, name='crear_servicio'),
     path('eliminar-servicio/<int:id>/', views.eliminar_servicio, name='eliminar_servicio'),
-     path('registrar-venta/', registrar_venta, name='registrar_venta'),
+    path('registrar-venta/', registrar_venta, name='registrar_venta'),
     path('ventas/', listar_ventas, name='listar_ventas'),
-    path('dashboard/', dashboard_view, name='dashboard'),
-
+    path('dashboard/', dashboard_view, name='dashboard'),  # Mantén solo esta línea
 ]

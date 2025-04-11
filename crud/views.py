@@ -117,7 +117,11 @@ def registrar_venta(request):
 
 def listar_ventas(request):
     ventas = Venta.objects.all().order_by('-fecha_venta')  # Ordena de más reciente a más antigua
+    print("Test")
     return render(request, 'crud/lista_ventas.html', {'ventas': ventas})
+
+
+from django.db.models import F, Sum
 
 
 def dashboard_view(request):
@@ -129,10 +133,10 @@ def dashboard_view(request):
         fecha_venta__gte=inicio_mes
     ).count()
     
-    # 2. Ganancias del mes (suma de todas las ganancias)
+    # 2. Ganancias del mes (calcular la diferencia entre precio_venta y precio_compra)
     ganancias_mes = Venta.objects.filter(
         fecha_venta__gte=inicio_mes
-    ).aggregate(total=Sum('ganancia'))['total'] or 0
+    ).aggregate(total=Sum(F('precio_venta') - F('precio_compra')))['total'] or 0
     
     # 3. Cuentas por vencer (próximos 7 días)
     fecha_limite = hoy + timedelta(days=7)
@@ -150,4 +154,3 @@ def dashboard_view(request):
         'cuentas_por_vencer': cuentas_por_vencer,
         'total_clientes': total_clientes
     })
-

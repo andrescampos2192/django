@@ -9,8 +9,6 @@ from crud.views import crear_servicio
 from crud.views import registrar_venta
 from crud.views import dashboard_view
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Usamos las vistas de autenticación integradas de Django:
@@ -18,13 +16,9 @@ urlpatterns = [
     path('crud/', include('crud.urls', namespace='crud_list')),
     path('registration/', register, name='register'),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('dashboard/', dashboard, name='dashboard'),
+    path('dashboard/', dashboard_view, name='dashboard'),  # Mantén esta línea
     path('crear-servicio/', crear_servicio, name='crear_servicio'),
-     path('logout/', LogoutView.as_view(), name='logout'),
-     path('login/', auth_views.LoginView.as_view(), name='login'),
-     path('', include('crud.urls')),
-     path('lista_servicios/', dashboard, name='lista_servicios'),
-     path('registrar-venta/', registrar_venta, name='registrar_venta'),
-     path('dashboard/', dashboard_view, name='dashboard'),
-  
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('registrar-venta/', registrar_venta, name='registrar_venta'),
 ]

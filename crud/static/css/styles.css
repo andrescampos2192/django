@@ -448,3 +448,145 @@ textarea.valid {
 .widget.warning h2 {
     color: #ff6347;
 }
+
+/* Home */
+.home-body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+    color: #333;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.home-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.home-title {
+    font-size: 2rem;
+    color: #006064;
+}
+
+.home-links {
+    margin-top: 20px;
+}
+
+.home-links .btn-home {
+    text-decoration: none;
+    background-color: #007bce;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.home-links .btn-home:hover {
+    background-color: #005fa3;
+}
+
+/* Login */
+.login-body {
+    background: linear-gradient(to right, #f0f8ff, #b3e5fc);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-title {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #007bce;
+}
+
+.login-form input[type="submit"] {
+    background-color: #007bce;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #005fa3;
+}
+
+.register-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #007bce;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+/* Registro */
+.register-body {
+    background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.register-title {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #007bce;
+}
+
+.register-form input[type="submit"] {
+    background-color: #007bce;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+}
+
+.register-form input[type="submit"]:hover {
+    background-color: #005fa3;
+}
+
+.login-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #007bce;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
