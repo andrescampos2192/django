@@ -115,11 +115,40 @@ def registrar_venta(request):
 
     return render(request, 'crud/registrar_venta.html', {'form': form})
 
-def listar_ventas(request):
-    ventas = Venta.objects.all().order_by('-fecha_venta')  # Ordena de más reciente a más antigua
-    print("Test")
-    return render(request, 'crud/lista_ventas.html', {'ventas': ventas})
+from django.shortcuts import render
+from .models import Venta
+from django.db.models import Q
 
+@login_required
+def listar_ventas(request):
+    ventas = Venta.objects.all()
+
+    # Filtrar por fechas
+    fecha_inicio = request.GET.get('fecha_inicio')
+    fecha_fin = request.GET.get('fecha_fin')
+    if fecha_inicio:
+        ventas = ventas.filter(fecha_venta__gte=fecha_inicio)
+    if fecha_fin:
+        ventas = ventas.filter(fecha_venta__lte=fecha_fin)
+
+    # Filtrar por cliente
+    cliente = request.GET.get('cliente')
+    if cliente:
+        ventas = ventas.filter(cliente__icontains=cliente)
+
+    # Filtrar por servicio
+    servicio = request.GET.get('servicio')
+    if servicio:
+        ventas = ventas.filter(servicio__nombre__icontains=servicio)
+
+    # Filtrar por usuario
+    usuario = request.GET.get('usuario')
+    if usuario:
+        ventas = ventas.filter(usuario__username__icontains=usuario)
+
+    return render(request, 'crud/lista_ventas.html', {
+        'ventas': ventas
+    })
 
 from django.db.models import F, Sum
 

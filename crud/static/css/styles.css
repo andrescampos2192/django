@@ -590,3 +590,131 @@ textarea.valid {
 .login-link:hover {
     text-decoration: underline;
 }
+
+/* Filtros */
+.filters-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.filter-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.filter-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.filters-form button {
+    background-color: #007bce;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+}
+
+.filters-form button:hover {
+    background-color: #005fa3;
+}
+
+/* Tabla de ventas */
+.ventas-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ventas-table th, .ventas-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.ventas-table th {
+    background-color: #007bce;
+    color: white;
+}
+
+.ventas-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.no-ventas {
+    text-align: center;
+    color: #aaa;
+}
+/* Botón de búsqueda pequeño */
+.filters-form button {
+    background-color: #007bce;
+    color: white;
+    padding: 5px 12px;  /* Reduzco más el padding */
+    border-radius: 6px;  /* Bordes un poco más suaves */
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;  /* Tamaño de fuente más pequeño */
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.filters-form button:hover {
+    background-color: #005fa3;
+}
+
+.filters-form button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 204, 0.5);
+}
+.filters-form {
+    display: flex;
+    align-items: center;  /* Alinea verticalmente los elementos */
+    gap: 10px;  /* Espacio entre los filtros y el botón */
+    margin-bottom: 20px; /* Separación entre el formulario de filtros y la tabla */
+}
+
+.filters-form select,
+.filters-form input {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+}
+
+.filters-form button {
+    background-color: #007bce;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    margin-top: 40%;
+    margin-left: 20%;
+}
+
+.filters-form button:hover {
+    background-color: #005fa3;
+}
+
+.filters-form button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 204, 0.5);
+}

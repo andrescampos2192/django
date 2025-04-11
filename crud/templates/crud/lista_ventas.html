@@ -3,7 +3,36 @@
 {% block content %}
 <div class="ventas-container">
     <h2 class="titulo">Ventas Registradas</h2>
-     
+
+    <!-- Filtros de búsqueda -->
+    <form method="get" class="filters-form">
+        <div class="filter-group">
+            <label for="fecha_inicio">Fecha de venta desde:</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ request.GET.fecha_inicio }}">
+        </div>
+        <div class="filter-group">
+            <label for="fecha_fin">Fecha de venta hasta:</label>
+            <input type="date" id="fecha_fin" name="fecha_fin" value="{{ request.GET.fecha_fin }}">
+        </div>
+        <div class="filter-group">
+            <label for="cliente">Cliente:</label>
+            <input type="text" id="cliente" name="cliente" value="{{ request.GET.cliente }}">
+        </div>
+        <div class="filter-group">
+            <label for="servicio">Servicio:</label>
+            <input type="text" id="servicio" name="servicio" value="{{ request.GET.servicio }}">
+        </div>
+        <div class="filter-group">
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" value="{{ request.GET.usuario }}">
+        </div>
+        <div>
+            <button type="submit" class="btn-guardar">Buscar</button>
+        </div>
+        
+    </form>
+
+    <!-- Tabla de ventas -->
     <div class="table-wrapper">
         <table class="ventas-table">
             <thead>
