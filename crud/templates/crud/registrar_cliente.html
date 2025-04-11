@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="form-title">Registrar Cliente</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            {{ form.nombre.label_tag }}
+            {{ form.nombre }}
+            <small class="error-message" id="error-nombre"></small>
+        </div>
+
+        <div class="form-group">
+            {{ form.telefono.label_tag }}
+            {{ form.telefono }}
+            <small class="error-message" id="error-telefono"></small>
+        </div>
+
+        <div class="form-group">
+            {{ form.correo.label_tag }}
+            {{ form.correo }}
+            <small class="error-message" id="error-correo"></small>
+        </div>
+
+        <button type="submit" class="btn-guardar">Guardar Cliente</button>
+    </form>
+</div>
+{% endblock %}

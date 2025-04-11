@@ -8,6 +8,8 @@ from django.contrib.auth import views as auth_views
 from crud.views import crear_servicio
 from crud.views import registrar_venta
 from crud.views import dashboard_view
+from crud.views import cuentas_por_vencer
+from crud.views import listar_clientes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -21,4 +23,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('registrar-venta/', registrar_venta, name='registrar_venta'),
+    path('cuentas_por_vencer/', cuentas_por_vencer, name='cuentas_por_vencer'), 
+    path('listar_clientes/', listar_clientes, name='listar_clientes'),
 ]

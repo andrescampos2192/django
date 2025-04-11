@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="ventas-container">
+    <h2 class="titulo">Cuentas por Vencer</h2>
+
+    <div class="table-wrapper">
+        <table class="ventas-table">
+            <thead>
+                <tr>
+                    <th>Servicio</th>
+                    <th>Cliente</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Fecha Vencimiento</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venta in cuentas_vencidas %}
+                <tr>
+                    <td>{{ venta.servicio.nombre }}</td>
+                    <td>{{ venta.cliente }}</td>
+                    <td>{{ venta.telefono }}</td>
+                    <td>{{ venta.correo }}</td>
+                    <td>{{ venta.fecha_vencimiento|date:"d/m/Y" }}</td>
+                    <td>{{ venta.observaciones|default:"—" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="no-ventas">No hay cuentas por vencer.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

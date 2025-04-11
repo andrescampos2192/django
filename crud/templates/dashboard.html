@@ -9,28 +9,31 @@
     <p class="dashboard-subtitle">Aquí podrás gestionar tus servicios y ventas.</p>
 
     <div class="dashboard-container">
-        <!-- Widget de Total de Clientes -->
+        <a href="{% url 'crud:listar_clientes' %}" class="widget-link">
         <div class="widget">
             <h2>{{ total_clientes }}</h2>
             <p>Clientes registrados</p>
         </div>
 
         <!-- Widget de Cuentas Vendidas Este Mes -->
-        <div class="widget">
+        <a href="{% url 'crud:listar_ventas' %}" class="widget-link">
+            <div class="widget">
             <h2>{{ cuentas_vendidas_mes }}</h2>
             <p>Cuentas vendidas este mes</p>
         </div>
-
+</a>
         <!-- Widget de Ganancias Este Mes -->
         <div class="widget">
             <h2>{{ ganancias_mes }} Bs</h2>
             <p>Ganancias este mes</p>
         </div>
 
-        <!-- Widget de Cuentas por Vencer -->
-        <div class="widget warning">
-            <h2>{{ cuentas_por_vencer }}</h2>
-            <p>Cuentas por vencer</p>
-        </div>
+        <!-- Widget de Cuentas por Vencer (clickeable) -->
+        <a href="{% url 'crud:cuentas_por_vencer' %}" class="widget-link">
+            <div class="widget warning">
+                <h2>{{ cuentas_por_vencer }}</h2>
+                <p>Cuentas por vencer</p>
+            </div>
+        </a>
     </div>
 {% endblock %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import taskform, ServicioForm, VentaForm
+from .forms import taskform, ServicioForm, VentaForm, ClienteForm
 from .models import task, Servicio, Venta, Cliente 
 from django.db.models import Sum
 from django.utils.timezone import now
@@ -112,8 +112,14 @@ def registrar_venta(request):
             return redirect('crud:registrar_venta')  # Te mantiene en la misma página
     else:
         form = VentaForm()
+        clientes = Cliente.objects.all()  # Aquí obtienes los clientes
 
-    return render(request, 'crud/registrar_venta.html', {'form': form})
+    # Pasa los clientes al contexto
+    return render(request, 'crud/registrar_venta.html', {
+        'form': form,
+        'clientes': clientes,  # Agrega los clientes al contexto
+    })
+
 
 from django.shortcuts import render
 from .models import Venta
@@ -183,3 +189,35 @@ def dashboard_view(request):
         'cuentas_por_vencer': cuentas_por_vencer,
         'total_clientes': total_clientes
     })
+
+@login_required
+def cuentas_por_vencer(request):
+    hoy = timezone.now()
+    fecha_limite = hoy + timedelta(days=7)  # Las cuentas que vencen en los próximos 7 días
+
+    cuentas_vencidas = Venta.objects.filter(
+        fecha_vencimiento__gte=hoy,
+        fecha_vencimiento__lte=fecha_limite
+    )
+
+    return render(request, 'crud/cuentas_por_vencer.html', {
+        'cuentas_vencidas': cuentas_vencidas
+    })
+
+
+def registrar_cliente(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()  # Guardar el cliente en la base de datos
+            return redirect('crud:registrar_venta')  # Redirigir a la página que listará los clientes
+    else:
+        form = ClienteForm()
+
+    return render(request, 'crud/registrar_cliente.html', {'form': form})
+
+
+@login_required
+def listar_clientes(request):
+    clientes = Cliente.objects.all()
+    return render(request, 'crud/listar_clientes.html', {'clientes': clientes})

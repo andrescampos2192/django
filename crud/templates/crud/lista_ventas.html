@@ -46,6 +46,10 @@
                     <th>Fecha Vencimiento</th>
                     <th>Observaciones</th>
                     <th>Usuario</th>
+                    <th>Teléfono</th> <!-- Nueva columna -->
+                    <th>Correo</th> <!-- Nueva columna -->
+                    <th>Contraseña</th> <!-- Nueva columna -->
+                    <th>Pin</th> <!-- Nueva columna -->
                 </tr>
             </thead>
             <tbody>
@@ -60,10 +64,14 @@
                     <td>{{ venta.fecha_vencimiento|date:"d/m/Y" }}</td>
                     <td>{{ venta.observaciones|default:"—" }}</td>
                     <td>{{ venta.usuario.username }}</td>
+                    <td>{{ venta.telefono }}</td> <!-- Mostrar teléfono -->
+                    <td>{{ venta.correo }}</td> <!-- Mostrar correo -->
+                    <td>{{ venta.contraseña }}</td> <!-- Mostrar contraseña -->
+                    <td>{{ venta.pin }}</td> <!-- Mostrar pin -->
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="10" class="no-ventas">No hay ventas registradas.</td>
+                    <td colspan="14" class="no-ventas">No hay ventas registradas.</td>
                 </tr>
                 {% endfor %}
             </tbody>
